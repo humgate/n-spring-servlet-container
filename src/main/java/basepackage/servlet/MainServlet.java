@@ -1,7 +1,9 @@
 package basepackage.servlet;
 
+import basepackage.config.JavaConfig;
 import basepackage.controller.PostController;
 import basepackage.exception.NotFoundException;
+import basepackage.service.PostService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,7 @@ public class MainServlet extends HttpServlet {
 
   @Override
   public void init() {
-    final var context = new AnnotationConfigApplicationContext("basepackage");
+    final var context = new AnnotationConfigApplicationContext(JavaConfig.class);
     controller = context.getBean(PostController.class);
   }
 
