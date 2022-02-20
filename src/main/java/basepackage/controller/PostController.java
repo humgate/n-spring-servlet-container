@@ -1,12 +1,13 @@
-package controller;
+package basepackage.controller;
 
+import basepackage.model.Post;
+import basepackage.service.PostService;
 import com.google.gson.Gson;
-import model.Post;
-import service.PostService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
+
 
 public class PostController {
   public static final String APPLICATION_JSON = "application/json";

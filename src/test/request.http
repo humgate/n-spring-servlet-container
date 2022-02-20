@@ -10,12 +10,12 @@ POST http://localhost:8080/api/posts
 Content-Type: application/json
 
 {
-  "id": 6,
+  "id": 0,
   "content": "Last Post"
 }
 
 ###
-DELETE http://localhost:8080/api/posts/4
+DELETE http://localhost:8080/api/posts/1
 
 ###
 HEAD http://localhost:8080/api/posts/4

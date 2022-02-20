@@ -1,9 +1,10 @@
-package servlet;
+package basepackage.servlet;
 
-import controller.PostController;
-import exception.NotFoundException;
-import repository.PostRepository;
-import service.PostService;
+import basepackage.config.JavaConfig;
+import basepackage.controller.PostController;
+import basepackage.exception.NotFoundException;
+import basepackage.service.PostService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +23,12 @@ public class MainServlet extends HttpServlet {
 
   @Override
   public void init() {
-    final var repository = new PostRepository();
-    final var service = new PostService(repository);
-    controller = new PostController(service);
+    final var context = new AnnotationConfigApplicationContext(JavaConfig.class);
+    controller = context.getBean(PostController.class);
   }
 
   @Override
-  protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  protected void service(HttpServletRequest req, HttpServletResponse resp) {
     // если деплоились в root context, то достаточно этого
     try {
       final var path = req.getRequestURI();
@@ -68,19 +68,11 @@ public class MainServlet extends HttpServlet {
       }
 
       resp.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-      resp.setContentType(TEXT_CONTENT_TYPE);
-      resp.getWriter().print(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-
     } catch (NotFoundException e) {
       e.printStackTrace();
       resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-      resp.setContentType(TEXT_CONTENT_TYPE);
-      resp.getWriter().print(HttpServletResponse.SC_NOT_FOUND);
-
     } catch (Exception e) {
       e.printStackTrace();
-      resp.setContentType(TEXT_CONTENT_TYPE);
-      resp.getWriter().print(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
   }

@@ -1,7 +1,7 @@
-package repository;
+package basepackage.repository;
 
-import exception.NotFoundException;
-import model.Post;
+import basepackage.exception.NotFoundException;
+import basepackage.model.Post;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-// Stub
+
 public class PostRepository {
   private final ConcurrentHashMap<Long, Post> posts = new ConcurrentHashMap<>();
   private final AtomicLong counter = new AtomicLong(0L);
