@@ -1,4 +1,4 @@
-package model;
+package basepackage.model;
 
 public class Post {
   private long id;
